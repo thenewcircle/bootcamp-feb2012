@@ -3,16 +3,24 @@ package com.marakana.android.yamba;
 import winterwell.jtwitter.Twitter;
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class YambaApp extends Application {
+public class YambaApp extends Application implements OnSharedPreferenceChangeListener {
 	static final String TAG = "YambaApp";
 	private Twitter twitter;
+	private SharedPreferences prefs;
+	StatusData statusData;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefs.registerOnSharedPreferenceChangeListener(this);
+		
+		statusData = new StatusData(this);
+
 		Log.d(TAG, "onCreated");
 	}
 
@@ -28,8 +36,6 @@ public class YambaApp extends Application {
 			// System.setProperty("http.proxyPassword", "password");
 
 			// Read preferences
-			SharedPreferences prefs = PreferenceManager
-					.getDefaultSharedPreferences(this);
 			String username = prefs.getString("username", "");
 			String password = prefs.getString("password", "");
 			String server = prefs.getString("server", "");
@@ -40,6 +46,13 @@ public class YambaApp extends Application {
 			twitter.setAPIRootUrl(server);
 		}
 		return twitter;
+	}
+
+	/** Called whenever preferences have changed. */
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		twitter = null;
+		
 	}
 
 }
