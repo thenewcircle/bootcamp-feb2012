@@ -13,5 +13,7 @@
     <string name="passwordSummary">What\'s your password?</string>
     <string name="server">Server</string>
     <string name="serverSummary">URL where Server API is at</string>
+    <string name="preferences">Preferences</string>
+    <string name="prefs">Prefs</string>
 
 </resources>
