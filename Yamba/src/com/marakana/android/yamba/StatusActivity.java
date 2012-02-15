@@ -3,6 +3,7 @@ package com.marakana.android.yamba;
 import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -101,8 +102,14 @@ public class StatusActivity extends Activity implements TextWatcher {
 	}
 
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		int length = statusMsg.getText().length();
-		textCount.setText( Integer.toString( 140-length ) );
+		int available = 140 - statusMsg.getText().length();
+		textCount.setText( Integer.toString( available ) );
+		
+		if( available < 10 ) {
+			textCount.setTextColor( Color.RED );
+		} else {
+			textCount.setTextColor( Color.WHITE );
+		}
 	}
 
 }
