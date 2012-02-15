@@ -25,6 +25,7 @@ public class RefreshService extends IntentService {
 		// Iterate of timeline
 		for (Status status : timeline) {
 			Log.d(TAG, String.format("%s: %s", status.user.name, status.text));
+			
 		}
 
 		Log.d(TAG, "onHandleIntent");
