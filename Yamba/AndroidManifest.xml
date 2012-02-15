@@ -19,9 +19,10 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".PrefsActivity" android:label="@string/preferences">
-            
+        <activity android:name=".PrefsActivity" android:label="@string/preferences">         
         </activity>
+        
+        <service android:name=".RefreshService"></service>
         
     </application>
 

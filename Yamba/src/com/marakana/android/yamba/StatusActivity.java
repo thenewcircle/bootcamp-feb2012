@@ -142,6 +142,9 @@ public class StatusActivity extends Activity implements TextWatcher {
 		case R.id.item_prefs:
 			startActivity( new Intent( this, PrefsActivity.class ) );
 			return true;
+		case R.id.item_refresh:
+			startService( new Intent( this, RefreshService.class) );
+			return true;
 		}
 		return false;
 	}

@@ -15,4 +15,5 @@
     <string name="password_summary">What\'s your password?</string>
     <string name="server_summary">URL where Server API is at</string>
     <string name="status_update">Status Update</string>
+    <string name="refresh">Refresh</string>
 </resources>

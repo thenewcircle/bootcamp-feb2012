@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
+    <item android:id="@+id/item_refresh" android:icon="@android:drawable/ic_menu_rotate" android:showAsAction="always" android:title="@string/refresh">
+    </item><item
         android:id="@+id/item_prefs"
         android:icon="@android:drawable/ic_menu_preferences"
+        android:showAsAction="ifRoom"
         android:title="@string/preferences"
-        android:titleCondensed="@string/prefs" android:showAsAction="ifRoom">
+        android:titleCondensed="@string/prefs">
     </item>
+    
 
 </menu>
