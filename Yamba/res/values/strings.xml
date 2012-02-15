@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
     <string name="hello">Hello, Ken!</string>
     <string name="app_name">Yamba</string>
     <string name="activity_status_title">Status Update</string>
@@ -10,10 +9,10 @@
     <string name="username">Username</string>
     <string name="username_summary">Who do you log in as?</string>
     <string name="password">Password</string>
-    <string name="passwordSummary">What\'s your password?</string>
     <string name="server">Server</string>
-    <string name="serverSummary">URL where Server API is at</string>
     <string name="preferences">Preferences</string>
     <string name="prefs">Prefs</string>
-
+    <string name="password_summary">What\'s your password?</string>
+    <string name="server_summary">URL where Server API is at</string>
+    <string name="status_update">Status Update</string>
 </resources>

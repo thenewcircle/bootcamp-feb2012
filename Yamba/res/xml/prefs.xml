@@ -7,11 +7,11 @@
         android:title="@string/username" />
     <EditTextPreference
         android:key="password"
-        android:summary="@string/passwordSummary"
+        android:summary="@string/password_summary"
         android:title="@string/password" />
     <EditTextPreference
         android:key="server"
-        android:summary="@string/serverSummary"
+        android:summary="@string/server_summary"
         android:title="@string/server" />
 
 </PreferenceScreen>
