@@ -9,3 +9,6 @@ Think about how to add color when user has less than 10 characters left.
 
 
 == Lab: Add password and server to prefs.xml
+
+== Lab: Add a Refresh button to the menu
+* Hint: use icon: `@android:drawable/ic_menu_rotate`

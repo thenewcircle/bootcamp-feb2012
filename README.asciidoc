@@ -4,5 +4,6 @@ Android Bootcamp class delivered by Ken Jones and Marko Gargenta in Feb 2012, on
 == Useful Links and Commands
 * `git clone http://github.com/marakana/bootcamp-feb2012.git`
 * Android Design Guidelines[http://developer.android.com/design/index.html]
+* Remixing Android article[http://marakana.com/s/remixing_android,1044/index.html]
 * http://androiddrawableexplorer.appspot.com/
 
