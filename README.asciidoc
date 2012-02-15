@@ -1,0 +1,6 @@
+= Android Bootcamp
+Android Bootcamp class delivered by Ken Jones and Marko Gargenta in Feb 2012, online.
+
+== Useful Links and Commands
+* `git clone http://github.com/marakana/bootcamp-feb2012.git`
+* http://androiddrawableexplorer.appspot.com/
