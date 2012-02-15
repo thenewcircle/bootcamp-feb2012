@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class StatusActivity extends Activity implements OnClickListener {
+public class StatusActivity extends Activity {
     private static final String TAG = "StatusActivity";
     
     private Twitter twitter;
@@ -28,8 +26,6 @@ public class StatusActivity extends Activity implements OnClickListener {
 		Log.v(TAG, "onCreate() invoked");
         
         statusMsg = (EditText) findViewById(R.id.edit_msg);
-        Button updateButton = (Button) findViewById(R.id.button_update);
-        updateButton.setOnClickListener(this);
         
         toast = Toast.makeText(this, null, Toast.LENGTH_LONG);
         
@@ -45,6 +41,7 @@ public class StatusActivity extends Activity implements OnClickListener {
         twitter.setAPIRootUrl("http://yamba.marakana.com/api");
     }
 
+    /** android:onClick specifies to call onClick() when button is clicked. */
 	public void onClick(View v) {
 		int id = v.getId();
 		switch (id) {
