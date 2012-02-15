@@ -1,14 +1,11 @@
 package com.marakana.android.yamba;
 
-import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -22,8 +19,7 @@ import android.widget.Toast;
 
 public class StatusActivity extends Activity implements TextWatcher {
     private static final String TAG = "StatusActivity";
-    
-    private Twitter twitter;
+
     private EditText statusMsg;
     private TextView textCount;
     private Toast toast;
@@ -39,27 +35,7 @@ public class StatusActivity extends Activity implements TextWatcher {
         statusMsg = (EditText) findViewById(R.id.edit_msg);
         statusMsg.addTextChangedListener(this);
         
-        toast = Toast.makeText(this, null, Toast.LENGTH_LONG);
-        
-//        System.setProperty("http.proxyHost", "host");
-//        System.setProperty("http.proxyPort", "port_number");
-//
-//        If proxy requires authentication,
-//
-//        System.setProperty("http.proxyUser", "user");
-//        System.setProperty("http.proxyPassword", "password");
-        
-        
-        // Read preferences
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = prefs.getString("username", "");
-        String password = prefs.getString("password", "");
-        String server = prefs.getString("server", "");
-        Log.d(TAG, String.format("%s/%s@%s", username, password, server) );
-        
-        // Setup twitter object
-        twitter = new Twitter(username, password);
-        twitter.setAPIRootUrl(server);
+        toast = Toast.makeText(this, null, Toast.LENGTH_LONG);        
     }
 
     /** android:onClick specifies to call onClick() when button is clicked. */
@@ -90,7 +66,7 @@ public class StatusActivity extends Activity implements TextWatcher {
 		protected Integer doInBackground(String... params) {
 			int result = R.string.post_status_success;
 			try {
-				twitter.setStatus(params[0]);
+				((YambaApp)getApplication()).getTwitter().setStatus(params[0]);
 			} catch (TwitterException e) {
 				Log.w(TAG, "Failed to post message", e);
 				result = R.string.post_status_fail;

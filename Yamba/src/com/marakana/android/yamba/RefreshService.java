@@ -10,7 +10,7 @@ public class RefreshService extends IntentService {
 	/** Default constructor. */
 	public RefreshService() {
 		super(TAG);
-		Log.d(TAG, "Created");
+		Log.d(TAG, "Created: "+this.toString());
 	}
 
 	/** Called each time service is started. Runs on a separate worker thread. */
