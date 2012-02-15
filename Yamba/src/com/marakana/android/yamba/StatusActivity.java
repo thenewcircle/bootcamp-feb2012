@@ -27,7 +27,7 @@ public class StatusActivity extends Activity implements TextWatcher {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.status);
 		Log.v(TAG, "onCreate() invoked");
         
         textCount = (TextView) findViewById(R.id.count);
