@@ -1,0 +1,5 @@
+Lab: Add how many characters are still available to type (starting at 140).
+
+* Add a new TextView to your layout. (use: @+id/count)
+* Look at TextWatcher interface in the documentation
+
