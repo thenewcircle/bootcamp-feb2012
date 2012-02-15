@@ -8,20 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_update"
+        android:layout_below="@+id/count"
         android:inputType="textMultiLine" >
 
         <requestFocus />
     </EditText>
-
-    <Button
-        android:id="@+id/button_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:onClick="onClick"
-        android:text="@string/button_update_text" />
 
     <TextView
         android:id="@+id/TextView1"
@@ -31,5 +22,22 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/activity_status_title" />
+
+    <Button
+        android:id="@+id/button_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:onClick="onClick"
+        android:text="@string/button_update_text" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/TextView1"
+        android:text="140"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

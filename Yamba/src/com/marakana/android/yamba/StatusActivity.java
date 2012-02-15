@@ -5,17 +5,21 @@ import winterwell.jtwitter.TwitterException;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class StatusActivity extends Activity {
+public class StatusActivity extends Activity implements TextWatcher {
     private static final String TAG = "StatusActivity";
     
     private Twitter twitter;
     private EditText statusMsg;
+    private TextView textCount;
     private Toast toast;
 
 	/** Called when the activity is first created. */
@@ -25,7 +29,9 @@ public class StatusActivity extends Activity {
         setContentView(R.layout.main);
 		Log.v(TAG, "onCreate() invoked");
         
+        textCount = (TextView) findViewById(R.id.count);
         statusMsg = (EditText) findViewById(R.id.edit_msg);
+        statusMsg.addTextChangedListener(this);
         
         toast = Toast.makeText(this, null, Toast.LENGTH_LONG);
         
@@ -83,6 +89,20 @@ public class StatusActivity extends Activity {
 			toast.show();
 		}
 		
+	}
+
+	// TextWatcher Callbacks
+	
+	public void afterTextChanged(Editable arg0) {		
+	}
+
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {		
+	}
+
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		int length = statusMsg.getText().length();
+		textCount.setText( Integer.toString( 140-length ) );
 	}
 
 }
