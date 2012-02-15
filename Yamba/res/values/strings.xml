@@ -7,5 +7,11 @@
     <string name="button_update_text">Update Status</string>
     <string name="post_status_success">Successfully posted status update</string>
     <string name="post_status_fail">Failed to post status message</string>
+    <string name="username">Username</string>
+    <string name="username_summary">Who do you log in as?</string>
+    <string name="password">Password</string>
+    <string name="passwordSummary">What\'s your password?</string>
+    <string name="server">Server</string>
+    <string name="serverSummary">URL where Server API is at</string>
 
 </resources>
