@@ -9,6 +9,9 @@ import android.util.Log;
 
 public class YambaApp extends Application implements OnSharedPreferenceChangeListener {
 	static final String TAG = "YambaApp";
+	
+	public static final String ACTION_NEW_STATUS = "com.marakana.action.NEW_STATUS";
+	
 	private Twitter twitter;
 	private SharedPreferences prefs;
 	StatusData statusData;

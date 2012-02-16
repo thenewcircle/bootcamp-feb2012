@@ -1,7 +1,10 @@
 package com.marakana.android.yamba;
 
 import android.app.ListActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -19,8 +22,12 @@ public class TimelineActivity extends ListActivity {
 			StatusData.C_CREATED_AT };
 	static final int[] TO = { R.id.text_user, R.id.text_text,
 			R.id.text_created_at };
+	static final IntentFilter FILTER = new IntentFilter(
+			YambaApp.ACTION_NEW_STATUS);
 
 	Cursor cursor;
+	SimpleCursorAdapter adapter;
+	TimelineReceiver receiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +38,30 @@ public class TimelineActivity extends ListActivity {
 		startManagingCursor(cursor);
 
 		// Setup adapter
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-				R.layout.row, cursor, FROM, TO);
+		adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);
 		adapter.setViewBinder(VIEW_BINDER);
 		setListAdapter(adapter);
 
+		// Instantiate receiver
+		receiver = new TimelineReceiver();
+
 		Log.d(TAG, "onCreated");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Register TimelineReceiver
+		registerReceiver(receiver, FILTER);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		// Unregister TimelineReceiver
+		unregisterReceiver(receiver);
 	}
 
 	/**
@@ -84,6 +109,22 @@ public class TimelineActivity extends ListActivity {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * TimelineReceiver responsible for catching ACTION_NEW_STATUS and updating
+	 * the list.
+	 */
+	class TimelineReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// Refresh data
+			cursor = ((YambaApp) getApplication()).statusData.query();
+			startManagingCursor(cursor);
+			adapter.changeCursor(cursor);
+			Log.d(TAG, "TimelineReceiver: onReceive");
+		}
 	}
 
 }
