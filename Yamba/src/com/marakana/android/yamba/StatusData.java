@@ -3,6 +3,7 @@ package com.marakana.android.yamba;
 import winterwell.jtwitter.Twitter.Status;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -20,6 +21,8 @@ public class StatusData {
 	public static final String C_USER = "yamba_user";
 	public static final String C_TEXT = "yamba_text";
 
+	static final String ORDER_BY = C_CREATED_AT + " DESC";
+	
 	DbHelper dbHelper;
 
 	/** Constructor */
@@ -27,6 +30,12 @@ public class StatusData {
 		dbHelper = new DbHelper(context);
 	}
 
+	/** Returns all the statuses in the database. */
+	public Cursor query() {
+		SQLiteDatabase db = dbHelper.getReadableDatabase();	
+		return db.query(TABLE, null, null, null, null, null, ORDER_BY);
+	}
+	
 	/** Inserts a Status object into the database. */
 	public long insert(Status status) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
