@@ -1,10 +1,13 @@
 package com.marakana.android.yamba;
 
 import android.app.ListActivity;
+import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -16,7 +19,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
-public class TimelineActivity extends ListActivity {
+public class TimelineActivity extends ListActivity implements
+		LoaderManager.LoaderCallbacks<Cursor> {
 	static final String TAG = "TimelineActivity";
 	static final String[] FROM = { StatusProvider.C_USER,
 			StatusProvider.C_TEXT, StatusProvider.C_CREATED_AT };
@@ -24,6 +28,8 @@ public class TimelineActivity extends ListActivity {
 			R.id.text_created_at };
 	static final IntentFilter FILTER = new IntentFilter(
 			YambaApp.ACTION_NEW_STATUS);
+
+	static final int STATUS_LOADER = 47;
 
 	Cursor cursor;
 	SimpleCursorAdapter adapter;
@@ -33,9 +39,8 @@ public class TimelineActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Get data
-		cursor = getContentResolver().query(StatusProvider.CONTENT_URI, null,
-				null, null, StatusProvider.ORDER_BY);
+		// Initialize the loader
+		getLoaderManager().initLoader(STATUS_LOADER, null, this);
 
 		// Setup adapter
 		adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);
@@ -120,11 +125,24 @@ public class TimelineActivity extends ListActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// Refresh data
-			cursor = getContentResolver().query(StatusProvider.CONTENT_URI,
-					null, null, null, StatusProvider.ORDER_BY);
-			adapter.changeCursor(cursor);
+			getLoaderManager().restartLoader(STATUS_LOADER, null, TimelineActivity.this);
 			Log.d(TAG, "TimelineReceiver: onReceive");
 		}
+	}
+
+	// --- LoaderManager.LoaderCallbacks<Cursor> ---
+
+	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		return new CursorLoader(this, StatusProvider.CONTENT_URI, null, null,
+				null, StatusProvider.ORDER_BY);
+	}
+
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		adapter.swapCursor(cursor);
+	}
+
+	public void onLoaderReset(Loader<Cursor> loader) {
+		adapter.swapCursor(null);
 	}
 
 }
