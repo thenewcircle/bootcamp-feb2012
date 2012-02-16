@@ -19,13 +19,14 @@ public class RefreshService extends IntentService {
 	/** Called each time service is started. Runs on a separate worker thread. */
 	@Override
 	protected void onHandleIntent(Intent intent) {
+		// Gets 20 most recent statuses from us and our friends in the last 24 hours
 		List<Status> timeline = ((YambaApp) getApplication()).getTwitter()
 				.getFriendsTimeline();
 
 		// Iterate of timeline
 		for (Status status : timeline) {
 			Log.d(TAG, String.format("%s: %s", status.user.name, status.text));
-			
+			((YambaApp)getApplication()).statusData.insert(status);
 		}
 
 		Log.d(TAG, "onHandleIntent");
