@@ -4,15 +4,21 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SimpleCursorAdapter;
+import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TextView;
 
 public class TimelineActivity extends ListActivity {
 	static final String TAG = "TimelineActivity";
-	static final String[] FROM = { StatusData.C_USER, StatusData.C_TEXT, StatusData.C_CREATED_AT };
-	static final int[] TO = { R.id.text_user, R.id.text_text, R.id.text_created_at };
+	static final String[] FROM = { StatusData.C_USER, StatusData.C_TEXT,
+			StatusData.C_CREATED_AT };
+	static final int[] TO = { R.id.text_user, R.id.text_text,
+			R.id.text_created_at };
 
 	Cursor cursor;
 
@@ -25,11 +31,34 @@ public class TimelineActivity extends ListActivity {
 		startManagingCursor(cursor);
 
 		// Setup adapter
-		setListAdapter(new SimpleCursorAdapter(this, R.layout.row, cursor,
-				FROM, TO));
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+				R.layout.row, cursor, FROM, TO);
+		adapter.setViewBinder(VIEW_BINDER);
+		setListAdapter(adapter);
 
 		Log.d(TAG, "onCreated");
 	}
+
+	/**
+	 * Responsible for binding a particular row of data to a particular row in
+	 * the list view.
+	 */
+	static final ViewBinder VIEW_BINDER = new ViewBinder() {
+
+		/** Convert the timestamp from DB to relative time in the UI. */
+		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+			// Is this call binding the CreatedAt data?
+			if (view.getId() == R.id.text_created_at) {
+				long timestamp = cursor.getLong(columnIndex);
+				CharSequence relativeTime = DateUtils
+						.getRelativeTimeSpanString(timestamp);
+				((TextView) view).setText(relativeTime);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
 
 	// --- Options Menu Callbacks ---
 
