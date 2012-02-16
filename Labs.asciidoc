@@ -12,3 +12,6 @@ Think about how to add color when user has less than 10 characters left.
 
 == Lab: Add a Refresh button to the menu
 * Hint: use icon: `@android:drawable/ic_menu_rotate`
+
+== Lab: Implement a toast for new statuses after refresh
+* Hint: You can use Toast from a service!
