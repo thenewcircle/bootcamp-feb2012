@@ -17,4 +17,5 @@
     <string name="status_update">Status Update</string>
     <string name="refresh">Refresh</string>
     <string name="timeline">Timeline</string>
+    <string name="status">Status</string>
 </resources>

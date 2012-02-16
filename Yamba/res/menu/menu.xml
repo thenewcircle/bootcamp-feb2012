@@ -2,13 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@+id/item_refresh" android:icon="@android:drawable/ic_menu_rotate" android:showAsAction="always" android:title="@string/refresh">
-    </item><item
+    </item><item android:id="@+id/item_status_update" android:titleCondensed="@string/status" android:title="@string/status_update" android:icon="@android:drawable/ic_menu_add" android:showAsAction="always"></item><item
         android:id="@+id/item_prefs"
         android:icon="@android:drawable/ic_menu_preferences"
         android:showAsAction="ifRoom"
         android:title="@string/preferences"
         android:titleCondensed="@string/prefs">
     </item>
+    
     
 
 </menu>

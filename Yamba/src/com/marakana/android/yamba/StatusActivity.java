@@ -2,7 +2,6 @@ package com.marakana.android.yamba;
 
 import winterwell.jtwitter.TwitterException;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,8 +9,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -100,32 +97,7 @@ public class StatusActivity extends Activity implements TextWatcher {
 		} else {
 			textCount.setTextColor( Color.WHITE );
 		}
-	}
-
-	// --- Options Menu Callbacks ---
-		
-	/** Called first time to initialize the options menu.*/
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
-	}
-
-	/** Called each time a menu item is selected. */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch( item.getItemId() ) {
-		case R.id.item_prefs:
-			startActivity( new Intent( this, PrefsActivity.class ) );
-			return true;
-		case R.id.item_refresh:
-			startService( new Intent( this, RefreshService.class) );
-			return true;
-		}
-		return false;
-	}
-	
-	
+	}	
 
 }
 
