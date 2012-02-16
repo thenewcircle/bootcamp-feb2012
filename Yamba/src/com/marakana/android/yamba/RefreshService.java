@@ -26,15 +26,13 @@ public class RefreshService extends IntentService {
 		List<Status> timeline = ((YambaApp) getApplication()).getTwitter()
 				.getFriendsTimeline();
 
-		long id;
 		// Iterate of timeline
 		for (Status status : timeline) {
 			Log.d(TAG, String.format("%s: %s", status.user.name, status.text));
-			id = ((YambaApp) getApplication()).statusData.insert(status);
-			if (id != -1)
+			if (getContentResolver().insert(StatusProvider.CONTENT_URI,
+					StatusProvider.getValues(status)) != null)
 				count++;
 		}
-
 
 		Log.d(TAG, "onHandleIntent");
 	}
@@ -46,8 +44,8 @@ public class RefreshService extends IntentService {
 		// Do we have any new statuses?
 		if (count > 0) {
 			// Send a broadcast
-			sendBroadcast(new Intent(YambaApp.ACTION_NEW_STATUS));	
-			
+			sendBroadcast(new Intent(YambaApp.ACTION_NEW_STATUS));
+
 			// Create a toast with new statuses
 			Toast.makeText(getApplication(),
 					"You have " + count + " new statuses!", Toast.LENGTH_LONG)

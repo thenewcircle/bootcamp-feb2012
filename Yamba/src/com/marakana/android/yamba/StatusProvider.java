@@ -1,16 +1,21 @@
 package com.marakana.android.yamba;
 
 import winterwell.jtwitter.Twitter.Status;
+import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-public class StatusData {
-	public static final String TAG = "StatusData";
+public class StatusProvider extends ContentProvider {
+	static final String TAG = "StatusProvider";
+
+	public static final Uri CONTENT_URI = Uri
+			.parse("content://com.marakana.android.yamba.provider/status");
 
 	// DB constants
 	public static final String DB_NAME = "timeline.db";
@@ -25,27 +30,52 @@ public class StatusData {
 	
 	DbHelper dbHelper;
 
-	/** Constructor */
-	public StatusData(Context context) {
-		dbHelper = new DbHelper(context);
-	}
-
-	/** Returns all the statuses in the database. */
-	public Cursor query() {
-		SQLiteDatabase db = dbHelper.getReadableDatabase();	
-		return db.query(TABLE, null, null, null, null, null, ORDER_BY);
-	}
+	// --- ContentProvider Callbacks ---
 	
-	/** Inserts a Status object into the database. */
-	public long insert(Status status) {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		Log.d(TAG, String.format("%s: %s", status.user.name, status.text));
-		
-		// Try to insert into the database, ignoring duplicates
-		return db.insertWithOnConflict(TABLE, null, getValues(status),
-				SQLiteDatabase.CONFLICT_IGNORE);
+	@Override
+	public boolean onCreate() {
+		dbHelper = new DbHelper(this.getContext());
+		return true;
 	}
 
+	@Override
+	public Uri insert(Uri uri, ContentValues values) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		long id = db.insertWithOnConflict(TABLE, null, values,
+				SQLiteDatabase.CONFLICT_IGNORE);
+		if (id == -1) {
+			return null;
+		} else {
+			return Uri.withAppendedPath(CONTENT_URI, Long.toString(id) );
+		}
+	}
+
+	@Override
+	public int update(Uri uri, ContentValues values, String selection,
+			String[] selectionArgs) {
+		return 0;
+	}
+
+	@Override
+	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		return 0;
+	}
+
+	@Override
+	public Cursor query(Uri uri, String[] projection, String selection,
+			String[] selectionArgs, String orderBy) {
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		return db.query(TABLE, projection, selection, selectionArgs, null, null, orderBy);
+	}
+
+	@Override
+	public String getType(Uri uri) {
+		return null;
+	}
+
+	
+	// --- DbHelper ---
+	
 	/** Converts Status to ContentValues. */
 	public static ContentValues getValues(Status status) {
 		ContentValues values = new ContentValues();
@@ -82,6 +112,5 @@ public class StatusData {
 			db.execSQL("drop table is exists " + TABLE);
 			onCreate(db);
 		}
-
 	}
 }

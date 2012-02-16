@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 public class TimelineActivity extends ListActivity {
 	static final String TAG = "TimelineActivity";
-	static final String[] FROM = { StatusData.C_USER, StatusData.C_TEXT,
-			StatusData.C_CREATED_AT };
+	static final String[] FROM = { StatusProvider.C_USER,
+			StatusProvider.C_TEXT, StatusProvider.C_CREATED_AT };
 	static final int[] TO = { R.id.text_user, R.id.text_text,
 			R.id.text_created_at };
 	static final IntentFilter FILTER = new IntentFilter(
@@ -34,8 +34,8 @@ public class TimelineActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		// Get data
-		cursor = ((YambaApp) getApplication()).statusData.query();
-		startManagingCursor(cursor);
+		cursor = getContentResolver().query(StatusProvider.CONTENT_URI, null,
+				null, null, StatusProvider.ORDER_BY);
 
 		// Setup adapter
 		adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);
@@ -115,13 +115,13 @@ public class TimelineActivity extends ListActivity {
 	 * TimelineReceiver responsible for catching ACTION_NEW_STATUS and updating
 	 * the list.
 	 */
-	class TimelineReceiver extends BroadcastReceiver {
+	private class TimelineReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// Refresh data
-			cursor = ((YambaApp) getApplication()).statusData.query();
-			startManagingCursor(cursor);
+			cursor = getContentResolver().query(StatusProvider.CONTENT_URI,
+					null, null, null, StatusProvider.ORDER_BY);
 			adapter.changeCursor(cursor);
 			Log.d(TAG, "TimelineReceiver: onReceive");
 		}
