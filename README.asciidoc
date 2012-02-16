@@ -3,9 +3,10 @@ Android Bootcamp class delivered by Ken Jones and Marko Gargenta in Feb 2012, on
 
 == Useful Links and Commands
 * `git clone http://github.com/marakana/bootcamp-feb2012.git`
-* Android Design Guidelines[http://developer.android.com/design/index.html]
-* Remixing Android article[http://marakana.com/s/remixing_android,1044/index.html]
-* JTwitter library[http://www.winterwell.com/software/jtwitter.php]
+* http://developer.android.com/design/index.html[Android Design Guidelines]
+* http://marakana.com/s/video_introduction_to_eclipse_driving_java_productivity,595/index.html[Eclipse Video]
+* http://marakana.com/s/remixing_android,1044/index.html[Remixing Android article]
+* http://www.winterwell.com/software/jtwitter.php[JTwitter library]
 * http://androiddrawableexplorer.appspot.com/
 
 
