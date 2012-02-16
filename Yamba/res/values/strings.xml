@@ -16,4 +16,5 @@
     <string name="server_summary">URL where Server API is at</string>
     <string name="status_update">Status Update</string>
     <string name="refresh">Refresh</string>
+    <string name="timeline">Timeline</string>
 </resources>
