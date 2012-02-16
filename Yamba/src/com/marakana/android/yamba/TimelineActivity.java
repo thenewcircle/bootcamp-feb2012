@@ -11,8 +11,8 @@ import android.widget.SimpleCursorAdapter;
 
 public class TimelineActivity extends ListActivity {
 	static final String TAG = "TimelineActivity";
-	static final String[] FROM = { StatusData.C_USER, StatusData.C_TEXT };
-	static final int[] TO = { android.R.id.text1, android.R.id.text2 };
+	static final String[] FROM = { StatusData.C_USER, StatusData.C_TEXT, StatusData.C_CREATED_AT };
+	static final int[] TO = { R.id.text_user, R.id.text_text, R.id.text_created_at };
 
 	Cursor cursor;
 
@@ -25,8 +25,8 @@ public class TimelineActivity extends ListActivity {
 		startManagingCursor(cursor);
 
 		// Setup adapter
-		setListAdapter(new SimpleCursorAdapter(this,
-				android.R.layout.simple_list_item_2, cursor, FROM, TO));
+		setListAdapter(new SimpleCursorAdapter(this, R.layout.row, cursor,
+				FROM, TO));
 
 		Log.d(TAG, "onCreated");
 	}
