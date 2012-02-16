@@ -133,11 +133,15 @@ public class TimelineActivity extends ListActivity implements
 	// --- LoaderManager.LoaderCallbacks<Cursor> ---
 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		// Start progress bar here
+		
 		return new CursorLoader(this, StatusProvider.CONTENT_URI, null, null,
 				null, StatusProvider.ORDER_BY);
 	}
 
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		// Stop progress bar here
+		
 		adapter.swapCursor(cursor);
 	}
 
