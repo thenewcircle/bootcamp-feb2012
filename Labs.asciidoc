@@ -15,3 +15,4 @@ Think about how to add color when user has less than 10 characters left.
 
 == Lab: Implement a toast for new statuses after refresh
 * Hint: You can use Toast from a service!
+* Hint: insert() will return -1 if it fails.
