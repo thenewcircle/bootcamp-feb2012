@@ -132,6 +132,7 @@ public class TimelineActivity extends ListActivity implements
 
 	// --- LoaderManager.LoaderCallbacks<Cursor> ---
 
+	/** Called to crate the loader firs time. */ 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// Start progress bar here
 		
@@ -139,12 +140,14 @@ public class TimelineActivity extends ListActivity implements
 				null, StatusProvider.ORDER_BY);
 	}
 
+	/** Called when loader is ready - we got the data. */
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Stop progress bar here
 		
 		adapter.swapCursor(cursor);
 	}
 
+	/** Called when loader is no longer available. */
 	public void onLoaderReset(Loader<Cursor> loader) {
 		adapter.swapCursor(null);
 	}

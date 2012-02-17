@@ -20,8 +20,11 @@ Think about how to add color when user has less than 10 characters left.
 == Lab: Move menu from `StatusActivity` to `TimelineActivity`
 * Add a menu item for Status Update
 
+== Lab: Add Purge data button to delete all data
+. Add a menu item to purge data
+. Implement +delete()+ in StatusProvider
+. Add functionality to delete all records in the database to the UI
 
 == Lab: Create a progress bar to show while loading/posting the data
 
-== Lab: Add Purge data button to delete all data
 
