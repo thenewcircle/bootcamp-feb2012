@@ -18,4 +18,5 @@
     <string name="refresh">Refresh</string>
     <string name="timeline">Timeline</string>
     <string name="status">Status</string>
+    <string name="purge">Purge</string>
 </resources>

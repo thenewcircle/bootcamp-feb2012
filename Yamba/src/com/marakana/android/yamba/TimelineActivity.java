@@ -12,10 +12,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
@@ -112,6 +115,11 @@ public class TimelineActivity extends ListActivity implements
 		case R.id.item_status_update:
 			startActivity(new Intent(this, StatusActivity.class));
 			return true;
+		case R.id.item_purge:
+			int rows = getContentResolver().delete(StatusProvider.CONTENT_URI, "1", null);
+			// Refresh the view
+			sendBroadcast(new Intent(YambaApp.ACTION_NEW_STATUS));
+			Toast.makeText(this, "Purged "+rows+" records", Toast.LENGTH_LONG).show();
 		}
 		return false;
 	}
@@ -124,7 +132,7 @@ public class TimelineActivity extends ListActivity implements
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// Refresh data
+			// Refresh the view
 			getLoaderManager().restartLoader(STATUS_LOADER, null, TimelineActivity.this);
 			Log.d(TAG, "TimelineReceiver: onReceive");
 		}

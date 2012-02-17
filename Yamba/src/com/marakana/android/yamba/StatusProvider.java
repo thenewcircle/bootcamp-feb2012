@@ -58,7 +58,8 @@ public class StatusProvider extends ContentProvider {
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		return 0;
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		return db.delete(TABLE, selection, selectionArgs);
 	}
 
 	@Override
