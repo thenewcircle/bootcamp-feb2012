@@ -123,6 +123,9 @@ public class TimelineActivity extends ListActivity implements
 		case R.id.item_status_update:
 			startActivity(new Intent(this, StatusActivity.class));
 			return true;
+		case R.id.item_about:
+			startActivity(new Intent(this, AboutActivity.class));
+			return true;
 		case R.id.item_purge:
 			int rows = getContentResolver().delete(StatusProvider.CONTENT_URI,
 					"1", null);

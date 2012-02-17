@@ -23,4 +23,5 @@
     <string name="interval_summary">How often to refresh data?</string>
     <string name="should_vibrate">Should vibrate?</string>
     <string name="vibrate_summary">Should it vibrate for new statuses?</string>
+    <string name="about">About</string>
 </resources>

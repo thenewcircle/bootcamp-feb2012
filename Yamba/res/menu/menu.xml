@@ -10,6 +10,7 @@
         android:titleCondensed="@string/prefs">
     </item>
     <item android:id="@+id/item_purge" android:showAsAction="never" android:title="@string/purge"></item>
+    <item android:id="@+id/item_about" android:showAsAction="never" android:title="@string/about"></item>
     
     
 
