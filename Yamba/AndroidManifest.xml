@@ -12,6 +12,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <permission
+        android:name="com.marakana.android.yamba.permission.REFRESH"
+        android:protectionLevel="signature" />
+
     <application
         android:name=".YambaApp"
         android:debuggable="true"
@@ -34,12 +38,16 @@
             android:name=".PrefsActivity"
             android:label="@string/preferences" >
         </activity>
-        <activity android:name=".AboutActivity"
+        <activity
+            android:name=".AboutActivity"
             android:label="@string/about"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar.MinWidth">
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar.MinWidth" >
         </activity>
 
-        <service android:name=".RefreshService" >
+        <service
+            android:name=".RefreshService"
+            android:permission="com.marakana.android.yamba.permission.REFRESH"
+            android:exported="false" >
         </service>
 
         <receiver android:name=".BootReceiver" >
@@ -47,10 +55,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        
-        <receiver android:name=".NotificationReceiver">
+        <receiver android:name=".NotificationReceiver" >
             <intent-filter>
-                <action android:name="com.marakana.action.NEW_STATUS"/>
+                <action android:name="com.marakana.action.NEW_STATUS" />
             </intent-filter>
         </receiver>
 
