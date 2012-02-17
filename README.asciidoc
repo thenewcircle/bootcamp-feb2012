@@ -26,3 +26,6 @@ Android Bootcamp class delivered by Ken Jones and Marko Gargenta in Feb 2012, on
 . http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part2.mov
 . http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part3.mov
 . http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part4.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day5-Part1.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day5-Part2.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day5-Part3.mov
