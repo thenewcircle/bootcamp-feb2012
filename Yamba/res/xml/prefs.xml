@@ -13,5 +13,6 @@
         android:key="server"
         android:summary="@string/server_summary"
         android:title="@string/server" />
+    <ListPreference android:key="interval" android:title="@string/interval" android:summary="@string/interval_summary" android:entryValues="@array/interval_values" android:entries="@array/interval_names"/>
 
 </PreferenceScreen>

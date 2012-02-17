@@ -19,4 +19,6 @@
     <string name="timeline">Timeline</string>
     <string name="status">Status</string>
     <string name="purge">Purge</string>
+    <string name="interval">Interval</string>
+    <string name="interval_summary">How often to refresh data?</string>
 </resources>

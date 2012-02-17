@@ -1,7 +1,11 @@
 package com.marakana.android.yamba;
 
 import winterwell.jtwitter.Twitter;
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
@@ -21,6 +25,8 @@ public class YambaApp extends Application implements OnSharedPreferenceChangeLis
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		prefs.registerOnSharedPreferenceChangeListener(this);
 
+		setupRefreshAlarm();
+		
 		Log.d(TAG, "onCreated");
 	}
 
@@ -52,7 +58,21 @@ public class YambaApp extends Application implements OnSharedPreferenceChangeLis
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
 		twitter = null;
-		
+	}
+	
+	static final long INTERVAL = 10000; // 10 seconds
+
+	/** Sets up the alarm. */
+	private void setupRefreshAlarm() {
+		// Create pending intent, i.e. our operation to submit to the alarm
+		PendingIntent pendingIntent = PendingIntent.getService(this, 0,
+				new Intent(this, RefreshService.class),
+				PendingIntent.FLAG_UPDATE_CURRENT);
+
+		// Setup alarm
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		alarmManager.setInexactRepeating(AlarmManager.RTC,
+				System.currentTimeMillis(), INTERVAL, pendingIntent);
 	}
 
 }
