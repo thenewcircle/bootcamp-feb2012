@@ -11,11 +11,12 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class YambaApp extends Application implements OnSharedPreferenceChangeListener {
+public class YambaApp extends Application implements
+		OnSharedPreferenceChangeListener {
 	static final String TAG = "YambaApp";
-	
+
 	public static final String ACTION_NEW_STATUS = "com.marakana.action.NEW_STATUS";
-	
+
 	private Twitter twitter;
 	private SharedPreferences prefs;
 
@@ -26,7 +27,7 @@ public class YambaApp extends Application implements OnSharedPreferenceChangeLis
 		prefs.registerOnSharedPreferenceChangeListener(this);
 
 		setupRefreshAlarm();
-		
+
 		Log.d(TAG, "onCreated");
 	}
 
@@ -58,21 +59,31 @@ public class YambaApp extends Application implements OnSharedPreferenceChangeLis
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
 		twitter = null;
+		setupRefreshAlarm();
 	}
-	
-	static final long INTERVAL = 10000; // 10 seconds
+
+	static final String NEVER = "0";
 
 	/** Sets up the alarm. */
 	private void setupRefreshAlarm() {
+		// Get the interval from prefs
+		long interval = Long.parseLong( prefs.getString("interval", NEVER) );
+		Log.d(TAG, "Setting up alarm with interval: "+interval);
+
 		// Create pending intent, i.e. our operation to submit to the alarm
 		PendingIntent pendingIntent = PendingIntent.getService(this, 0,
 				new Intent(this, RefreshService.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
-		// Setup alarm
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		alarmManager.setInexactRepeating(AlarmManager.RTC,
-				System.currentTimeMillis(), INTERVAL, pendingIntent);
+
+		// Setup alarm
+		if ( NEVER.equals(interval) ) {
+			alarmManager.cancel(pendingIntent);
+		} else {
+			alarmManager.setInexactRepeating(AlarmManager.RTC,
+					System.currentTimeMillis(), interval, pendingIntent);
+		}
 	}
 
 }
