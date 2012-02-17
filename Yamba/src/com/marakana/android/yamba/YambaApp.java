@@ -75,6 +75,7 @@ public class YambaApp extends Application implements
 				new Intent(this, RefreshService.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
+		// Get Alarm Manager
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
 		// Setup alarm

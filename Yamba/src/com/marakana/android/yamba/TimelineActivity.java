@@ -2,6 +2,7 @@ package com.marakana.android.yamba;
 
 import android.app.ListActivity;
 import android.app.LoaderManager;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -42,8 +43,8 @@ public class TimelineActivity extends ListActivity implements
 		super.onCreate(savedInstanceState);
 
 		// Needed for the incremental progress bar in Action Bar
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setProgressBarIndeterminateVisibility(false);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setProgressBarIndeterminateVisibility(false);
 
 		// Initialize the loader
 		getLoaderManager().initLoader(STATUS_LOADER, null, this);
@@ -62,6 +63,10 @@ public class TimelineActivity extends ListActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		// Cancel any notifications
+		((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
+				.cancel(NotificationReceiver.NOTIFICATION_ID);
 
 		// Register TimelineReceiver
 		registerReceiver(receiver, FILTER);
@@ -119,10 +124,12 @@ public class TimelineActivity extends ListActivity implements
 			startActivity(new Intent(this, StatusActivity.class));
 			return true;
 		case R.id.item_purge:
-			int rows = getContentResolver().delete(StatusProvider.CONTENT_URI, "1", null);
+			int rows = getContentResolver().delete(StatusProvider.CONTENT_URI,
+					"1", null);
 			// Refresh the view
 			sendBroadcast(new Intent(YambaApp.ACTION_NEW_STATUS));
-			Toast.makeText(this, "Purged "+rows+" records", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Purged " + rows + " records",
+					Toast.LENGTH_LONG).show();
 		}
 		return false;
 	}
@@ -135,33 +142,34 @@ public class TimelineActivity extends ListActivity implements
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-	        setProgressBarIndeterminateVisibility(true);
+			setProgressBarIndeterminateVisibility(true);
 
 			// Refresh the view
-			getLoaderManager().restartLoader(STATUS_LOADER, null, TimelineActivity.this);
+			getLoaderManager().restartLoader(STATUS_LOADER, null,
+					TimelineActivity.this);
 			Log.d(TAG, "TimelineReceiver: onReceive");
 		}
 	}
 
 	// --- LoaderManager.LoaderCallbacks<Cursor> ---
 
-	/** Called to crate the loader firs time. */ 
+	/** Called to crate the loader firs time. */
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// Start progress bar here
-        setProgressBarIndeterminateVisibility(true);
+		setProgressBarIndeterminateVisibility(true);
 		return new CursorLoader(this, StatusProvider.CONTENT_URI, null, null,
 				null, StatusProvider.ORDER_BY);
 	}
 
 	/** Called when loader is ready - we got the data. */
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        setProgressBarIndeterminateVisibility(false);
+		setProgressBarIndeterminateVisibility(false);
 		adapter.swapCursor(cursor);
 	}
 
 	/** Called when loader is no longer available. */
 	public void onLoaderReset(Loader<Cursor> loader) {
-        setProgressBarIndeterminateVisibility(false);
+		setProgressBarIndeterminateVisibility(false);
 		adapter.swapCursor(null);
 	}
 
