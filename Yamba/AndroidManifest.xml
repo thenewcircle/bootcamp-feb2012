@@ -35,7 +35,8 @@
             android:label="@string/preferences" >
         </activity>
         <activity android:name=".AboutActivity"
-            android:label="@string/about">
+            android:label="@string/about"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar.MinWidth">
         </activity>
 
         <service android:name=".RefreshService" >

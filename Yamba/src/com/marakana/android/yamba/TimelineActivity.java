@@ -156,7 +156,7 @@ public class TimelineActivity extends ListActivity implements
 
 	// --- LoaderManager.LoaderCallbacks<Cursor> ---
 
-	/** Called to crate the loader firs time. */
+	/** Called to crate the loader first time. */
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// Start progress bar here
 		setProgressBarIndeterminateVisibility(true);
