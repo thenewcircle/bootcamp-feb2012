@@ -26,5 +26,6 @@ Think about how to add color when user has less than 10 characters left.
 . Add functionality to delete all records in the database to the UI
 
 == Lab: Create a progress bar to show while loading/posting the data
+* Hint: See ApiDemos, especially Views/Progress Bar examples
 
 
