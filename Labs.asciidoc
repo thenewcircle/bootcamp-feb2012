@@ -34,3 +34,9 @@ Think about how to add color when user has less than 10 characters left.
 . Update the preferences to ask user if device should vibrate
 . Use `Vibrator` service to vibrate the device
 
+== Lab: About Yamba activity
+. Create new `AboutActivity`
+. Add About Yamba menu item
+. Have it launch a blank About activity
+
+
