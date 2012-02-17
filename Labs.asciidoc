@@ -28,4 +28,5 @@ Think about how to add color when user has less than 10 characters left.
 == Lab: Create a progress bar to show while loading/posting the data
 * Hint: See ApiDemos, especially Views/Progress Bar examples
 
+== Lab: Use interval preference to setup and update the refresh alarm
 
