@@ -12,15 +12,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.view.Window;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TimelineActivity extends ListActivity implements
 		LoaderManager.LoaderCallbacks<Cursor> {
@@ -41,6 +40,10 @@ public class TimelineActivity extends ListActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// Needed for the incremental progress bar in Action Bar
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setProgressBarIndeterminateVisibility(false);
 
 		// Initialize the loader
 		getLoaderManager().initLoader(STATUS_LOADER, null, this);
@@ -132,6 +135,8 @@ public class TimelineActivity extends ListActivity implements
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+	        setProgressBarIndeterminateVisibility(true);
+
 			// Refresh the view
 			getLoaderManager().restartLoader(STATUS_LOADER, null, TimelineActivity.this);
 			Log.d(TAG, "TimelineReceiver: onReceive");
@@ -143,20 +148,20 @@ public class TimelineActivity extends ListActivity implements
 	/** Called to crate the loader firs time. */ 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// Start progress bar here
-		
+        setProgressBarIndeterminateVisibility(true);
 		return new CursorLoader(this, StatusProvider.CONTENT_URI, null, null,
 				null, StatusProvider.ORDER_BY);
 	}
 
 	/** Called when loader is ready - we got the data. */
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Stop progress bar here
-		
+        setProgressBarIndeterminateVisibility(false);
 		adapter.swapCursor(cursor);
 	}
 
 	/** Called when loader is no longer available. */
 	public void onLoaderReset(Loader<Cursor> loader) {
+        setProgressBarIndeterminateVisibility(false);
 		adapter.swapCursor(null);
 	}
 

@@ -2,6 +2,8 @@ package com.marakana.android.yamba;
 
 import winterwell.jtwitter.TwitterException;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 public class StatusActivity extends Activity implements TextWatcher {
     private static final String TAG = "StatusActivity";
+    static final int DIALOG_ID = 47;
 
     private EditText statusMsg;
     private TextView textCount;
@@ -40,11 +43,10 @@ public class StatusActivity extends Activity implements TextWatcher {
 		int id = v.getId();
 		switch (id) {
 		case R.id.button_update:
-			// User clicked the Update Status button
+			// User clicked the Update Status button			
 			Log.v(TAG, "Button clicked");
 			String msg = statusMsg.getText().toString();
 			Log.v(TAG, "User entered: " + msg);
-			statusMsg.setText("");
 			
 			if (!TextUtils.isEmpty(msg)) {
 				// Post the message to the server
@@ -58,6 +60,12 @@ public class StatusActivity extends Activity implements TextWatcher {
 	}
 	
 	private class PostToTwitter extends AsyncTask<String, Void, Integer> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showDialog(DIALOG_ID);
+		}
 
 		@Override
 		protected Integer doInBackground(String... params) {
@@ -73,14 +81,29 @@ public class StatusActivity extends Activity implements TextWatcher {
 
 		@Override
 		protected void onPostExecute(Integer result) {
+			removeDialog(DIALOG_ID);
+			statusMsg.setText("");
+
 			toast.setText(result);
 			toast.show();
 		}
 		
 	}
 
+	/** Called when we need to create the dialog. */
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Please wait while loading...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(true);
+		return dialog;
+	}
+	
+	
 	// --- TextWatcher Callbacks ---
 	
+
 	public void afterTextChanged(Editable arg0) {		
 	}
 
