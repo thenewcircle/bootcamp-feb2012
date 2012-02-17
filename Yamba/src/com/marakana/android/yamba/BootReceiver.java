@@ -14,7 +14,7 @@ public class BootReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// Create pending intent, i.e. our operation to submit to the alarm
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
+		PendingIntent pendingIntent = PendingIntent.getService(context, 0,
 				new Intent(context, RefreshService.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
