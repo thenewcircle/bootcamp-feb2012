@@ -30,3 +30,7 @@ Think about how to add color when user has less than 10 characters left.
 
 == Lab: Use interval preference to setup and update the refresh alarm
 
+== Lab: Vibrate the device when we get a new status
+. Update the preferences to ask user if device should vibrate
+. Use `VibratorManager` to vibrate the device
+
