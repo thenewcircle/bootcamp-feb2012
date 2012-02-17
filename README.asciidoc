@@ -11,18 +11,18 @@ Android Bootcamp class delivered by Ken Jones and Marko Gargenta in Feb 2012, on
 
 
 == Videos
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day1-afternoon-1.mov
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day1-afternoon-2.mov
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day1-morning-1.mov
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day2-afternoon-1.mov
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day2-afternoon-2.mov
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day2-morning-1.mov
-. http://marakana.com.s3.amazonaws.com/video/2012-02-13-intel/day2-morning-2.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day3-Part1.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day3-Part2.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day3-Part3.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day3-Part4.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day4-Part1.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day4-Part2.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day4-Part3.mov
-. http://marakana.com.s3.amazonaws.com/intel/videos/Intel-AndroidBootcamp-Day4-Part4.mov
+. http://marakana.com/external/video/2012-02-13-intel/day1-afternoon-1.mov
+. http://marakana.com/external/video/2012-02-13-intel/day1-afternoon-2.mov
+. http://marakana.com/external/video/2012-02-13-intel/day1-morning-1.mov
+. http://marakana.com/external/video/2012-02-13-intel/day2-afternoon-1.mov
+. http://marakana.com/external/video/2012-02-13-intel/day2-afternoon-2.mov
+. http://marakana.com/external/video/2012-02-13-intel/day2-morning-1.mov
+. http://marakana.com/external/video/2012-02-13-intel/day2-morning-2.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day3-Part1.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day3-Part2.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day3-Part3.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day3-Part4.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part1.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part2.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part3.mov
+. http://marakana.com/external/intel/videos/Intel-AndroidBootcamp-Day4-Part4.mov
